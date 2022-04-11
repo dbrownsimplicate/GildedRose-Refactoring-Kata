@@ -11,7 +11,7 @@ use GildedRose\Inventory\Model\BackstagePasses;
 use GildedRose\Inventory\Model\ConjuredManaCake;
 use GildedRose\Inventory\Model\DexterityVest;
 use GildedRose\Inventory\Model\ElixirOfTheMongoose;
-use GildedRose\Inventory\Model\Sulfuras;
+use GildedRose\Inventory\Model\SulfurasHandOfRagnaros;
 use GildedRose\Item;
 use PHPUnit\Framework\Constraint\IsEqual;
 use PHPUnit\Framework\TestCase;
@@ -175,7 +175,7 @@ class GildedRoseTest extends TestCase
 
     public function testSulfurasBeforeSellInDate()
     {
-        $items = [new Item(Sulfuras::NAME, 10, 10)];
+        $items = [new Item(SulfurasHandOfRagnaros::NAME, 10, 10)];
         $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
@@ -186,7 +186,7 @@ class GildedRoseTest extends TestCase
 
     public function testSulfurasOnSellInDate()
     {
-        $items = [new Item(Sulfuras::NAME, 0, 10)];
+        $items = [new Item(SulfurasHandOfRagnaros::NAME, 0, 10)];
         $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
@@ -197,7 +197,7 @@ class GildedRoseTest extends TestCase
 
     public function testSulfurasAfterSellInDate()
     {
-        $items = [new Item(Sulfuras::NAME, -1, 10)];
+        $items = [new Item(SulfurasHandOfRagnaros::NAME, -1, 10)];
         $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();

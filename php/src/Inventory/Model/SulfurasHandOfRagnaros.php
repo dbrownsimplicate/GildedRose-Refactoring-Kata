@@ -9,7 +9,7 @@ use GildedRose\Inventory\Property\Quality as QualityProperty;
 use GildedRose\Inventory\Property\SellIn as SellInProperty;
 use GildedRose\Item as GoblinItem;
 
-class Sulfuras extends AbstractInventoryModel
+class SulfurasHandOfRagnaros extends AbstractInventoryModel
 {
     public const NAME = 'Sulfuras, Hand of Ragnaros';
 

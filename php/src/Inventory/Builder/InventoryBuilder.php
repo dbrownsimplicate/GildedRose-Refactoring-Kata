@@ -8,7 +8,7 @@ use GildedRose\Inventory\Model\BackstagePasses;
 use GildedRose\Inventory\Model\ConjuredManaCake;
 use GildedRose\Inventory\Model\DexterityVest;
 use GildedRose\Inventory\Model\ElixirOfTheMongoose;
-use GildedRose\Inventory\Model\Sulfuras;
+use GildedRose\Inventory\Model\SulfurasHandOfRagnaros;
 use GildedRose\Item as GoblinItem;
 use RuntimeException;
 
@@ -27,8 +27,8 @@ class InventoryBuilder
                 return DexterityVest::build($item);
             case ElixirOfTheMongoose::NAME:
                 return ElixirOfTheMongoose::build($item);
-            case Sulfuras::NAME:
-                return Sulfuras::build($item);
+            case SulfurasHandOfRagnaros::NAME:
+                return SulfurasHandOfRagnaros::build($item);
             default:
                 throw new RuntimeException(sprintf('Item [%s] does not exist', $item->name));
         }
