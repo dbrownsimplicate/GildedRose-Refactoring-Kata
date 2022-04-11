@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests;
 
 use GildedRose\GildedRose;
+use GildedRose\Inventory\Builder\InventoryBuilder;
 use GildedRose\Item;
 use PHPUnit\Framework\TestCase;
 
@@ -13,7 +14,7 @@ class GildedRoseTest extends TestCase
     public function testAgedBrieBeforeSellInDate(): void
     {
         $items = [new Item('Aged Brie', 10, 10)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -24,7 +25,7 @@ class GildedRoseTest extends TestCase
     public function testAgedBrieOnSellInDate(): void
     {
         $items = [new Item('Aged Brie', 0, 10)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -35,7 +36,7 @@ class GildedRoseTest extends TestCase
     public function testAgedBrieAfterSellInDate(): void
     {
         $items = [new Item('Aged Brie', -5, 10)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -46,7 +47,7 @@ class GildedRoseTest extends TestCase
     public function testAgedBrieBeforeSellInDateWithMaximumQuality(): void
     {
         $items = [new Item('Aged Brie', 10, 50)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -57,7 +58,7 @@ class GildedRoseTest extends TestCase
     public function testAgedBrieOnSellInDateWithMaximumQuality(): void
     {
         $items = [new Item('Aged Brie', 0, 50)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -68,7 +69,7 @@ class GildedRoseTest extends TestCase
     public function testAgedBrieOnSellInDateNearMaximumQuality(): void
     {
         $items = [new Item('Aged Brie', 0, 49)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -79,7 +80,7 @@ class GildedRoseTest extends TestCase
     public function testAgedBrieAfterSellInDateWithMaximumQuality(): void
     {
         $items = [new Item('Aged Brie', -10, 50)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -90,7 +91,7 @@ class GildedRoseTest extends TestCase
     public function testBackstagePassesBeforeSellInDate(): void
     {
         $items = [new Item('Backstage passes to a TAFKAL80ETC concert', 10, 10)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -101,7 +102,7 @@ class GildedRoseTest extends TestCase
     public function testBackstagePassesMoreThanTenDaysBeforeSellInDate(): void
     {
         $items = [new Item('Backstage passes to a TAFKAL80ETC concert', 11, 10)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -112,7 +113,7 @@ class GildedRoseTest extends TestCase
     public function testBackstagePassesQualityIncreaseByThreeWithFiveDaysLeftToSellInDate(): void
     {
         $items = [new Item('Backstage passes to a TAFKAL80ETC concert', 5, 10)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -124,7 +125,7 @@ class GildedRoseTest extends TestCase
     public function testBackstagePassesQualityDropsToZeroAfterSellInDate(): void
     {
         $items = [new Item('Backstage passes to a TAFKAL80ETC concert', 0, 10)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -135,7 +136,7 @@ class GildedRoseTest extends TestCase
     public function testBackstagePassesCloseToSellInDateWithMaximumQuality(): void
     {
         $items = [new Item('Backstage passes to a TAFKAL80ETC concert', 10, 50)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -146,7 +147,7 @@ class GildedRoseTest extends TestCase
     public function testBackstagePassesFiveDaysLeftToSellInDateWithMaximumQuality(): void
     {
         $items = [new Item('Backstage passes to a TAFKAL80ETC concert', 5, 50)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -157,7 +158,7 @@ class GildedRoseTest extends TestCase
     public function testBackstagePassesQualityDropsToZeroAfterSellInDateWithMaximumQuality(): void
     {
         $items = [new Item('Backstage passes to a TAFKAL80ETC concert', 0, 50)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -168,7 +169,7 @@ class GildedRoseTest extends TestCase
     public function testSulfurasBeforeSellInDate()
     {
         $items = [new Item('Sulfuras, Hand of Ragnaros', 10, 10)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -179,7 +180,7 @@ class GildedRoseTest extends TestCase
     public function testSulfurasOnSellInDate()
     {
         $items = [new Item('Sulfuras, Hand of Ragnaros', 0, 10)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -190,7 +191,7 @@ class GildedRoseTest extends TestCase
     public function testSulfurasAfterSellInDate()
     {
         $items = [new Item('Sulfuras, Hand of Ragnaros', -1, 10)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -201,7 +202,7 @@ class GildedRoseTest extends TestCase
     public function testElixirBeforeSellInDate()
     {
         $items = [new Item('Elixir of the Mongoose', 10, 10)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -212,7 +213,7 @@ class GildedRoseTest extends TestCase
     public function testElixirOnSellInDate()
     {
         $items = [new Item('Elixir of the Mongoose', 0, 10)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -223,7 +224,7 @@ class GildedRoseTest extends TestCase
     public function testElixirAfterSellInDate()
     {
         $items = [new Item('Elixir of the Mongoose', -5, 10)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -234,7 +235,7 @@ class GildedRoseTest extends TestCase
     public function testDexterityVestBeforeSellInDate()
     {
         $items = [new Item('+5 Dexterity Vest', 10, 10)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -245,7 +246,7 @@ class GildedRoseTest extends TestCase
     public function testDexterityVestOnSellInDate()
     {
         $items = [new Item('+5 Dexterity Vest', 0, 10)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
@@ -256,7 +257,7 @@ class GildedRoseTest extends TestCase
     public function testDexterityVestAfterSellInDate()
     {
         $items = [new Item('+5 Dexterity Vest', -5, 10)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
 
         $gildedRose->updateQuality();
 
