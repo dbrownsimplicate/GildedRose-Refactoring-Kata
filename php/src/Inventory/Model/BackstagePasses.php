@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace GildedRose\Inventory\Model;
 
-class BackstagePasses
+class BackstagePasses extends AbstractInventoryModel
 {
     public const NAME = 'Backstage passes to a TAFKAL80ETC concert';
 
-    public function dayPasses()
+    public function dayPasses(): void
     {
         // TODO: Implement logic that sets the following:
         //  - Quality increases by 1 if sellIn date is more than 10
