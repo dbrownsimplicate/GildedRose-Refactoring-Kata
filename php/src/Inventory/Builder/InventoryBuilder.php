@@ -7,7 +7,7 @@ use GildedRose\Inventory\Model\AgedBrie;
 use GildedRose\Inventory\Model\BackstagePasses;
 use GildedRose\Inventory\Model\ConjuredManaCake;
 use GildedRose\Inventory\Model\DexterityVest;
-use GildedRose\Inventory\Model\Elixir;
+use GildedRose\Inventory\Model\ElixirOfTheMongoose;
 use GildedRose\Inventory\Model\Sulfuras;
 use GildedRose\Item as GoblinItem;
 use RuntimeException;
@@ -25,8 +25,8 @@ class InventoryBuilder
                 return ConjuredManaCake::build($item);
             case DexterityVest::NAME:
                 return DexterityVest::build($item);
-            case Elixir::NAME:
-                return Elixir::build($item);
+            case ElixirOfTheMongoose::NAME:
+                return ElixirOfTheMongoose::build($item);
             case Sulfuras::NAME:
                 return Sulfuras::build($item);
             default:
