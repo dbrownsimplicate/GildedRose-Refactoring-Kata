@@ -86,4 +86,82 @@ class GildedRoseTest extends TestCase
         $this->assertEquals(-11, $items[0]->sell_in);
         $this->assertEquals(50, $items[0]->quality);
     }
+
+    public function testBackstagePassesBeforeSellInDate(): void
+    {
+        $items = [new Item('Backstage passes to a TAFKAL80ETC concert', 10, 10)];
+        $gildedRose = new GildedRose($items);
+
+        $gildedRose->updateQuality();
+
+        $this->assertEquals(9, $items[0]->sell_in);
+        $this->assertEquals(12, $items[0]->quality);
+    }
+
+    public function testBackstagePassesMoreThanTenDaysBeforeSellInDate(): void
+    {
+        $items = [new Item('Backstage passes to a TAFKAL80ETC concert', 11, 10)];
+        $gildedRose = new GildedRose($items);
+
+        $gildedRose->updateQuality();
+
+        $this->assertEquals(10, $items[0]->sell_in);
+        $this->assertEquals(11, $items[0]->quality);
+    }
+
+    public function testBackstagePassesQualityIncreaseByThreeWithFiveDaysLeftToSellInDate(): void
+    {
+        $items = [new Item('Backstage passes to a TAFKAL80ETC concert', 5, 10)];
+        $gildedRose = new GildedRose($items);
+
+        $gildedRose->updateQuality();
+
+        $this->assertEquals(4, $items[0]->sell_in);
+        $this->assertEquals(13, $items[0]->quality);
+    }
+
+
+    public function testBackstagePassesQualityDropsToZeroAfterSellInDate(): void
+    {
+        $items = [new Item('Backstage passes to a TAFKAL80ETC concert', 0, 10)];
+        $gildedRose = new GildedRose($items);
+
+        $gildedRose->updateQuality();
+
+        $this->assertEquals(-1, $items[0]->sell_in);
+        $this->assertEquals(0, $items[0]->quality);
+    }
+
+    public function testBackstagePassesCloseToSellInDateWithMaximumQuality(): void
+    {
+        $items = [new Item('Backstage passes to a TAFKAL80ETC concert', 10, 50)];
+        $gildedRose = new GildedRose($items);
+
+        $gildedRose->updateQuality();
+
+        $this->assertEquals(9, $items[0]->sell_in);
+        $this->assertEquals(50, $items[0]->quality);
+    }
+
+    public function testBackstagePassesFiveDaysLeftToSellInDateWithMaximumQuality(): void
+    {
+        $items = [new Item('Backstage passes to a TAFKAL80ETC concert', 5, 50)];
+        $gildedRose = new GildedRose($items);
+
+        $gildedRose->updateQuality();
+
+        $this->assertEquals(4, $items[0]->sell_in);
+        $this->assertEquals(50, $items[0]->quality);
+    }
+
+    public function testBackstagePassesQualityDropsToZeroAfterSellInDateWithMaximumQuality(): void
+    {
+        $items = [new Item('Backstage passes to a TAFKAL80ETC concert', 0, 50)];
+        $gildedRose = new GildedRose($items);
+
+        $gildedRose->updateQuality();
+
+        $this->assertEquals(-1, $items[0]->sell_in);
+        $this->assertEquals(0, $items[0]->quality);
+    }
 }
