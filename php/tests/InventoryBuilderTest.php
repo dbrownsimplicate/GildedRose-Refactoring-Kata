@@ -13,6 +13,7 @@ use GildedRose\Inventory\Property\Quality as QualityProperty;
 use GildedRose\Inventory\Property\SellIn as SellInProperty;
 use GildedRose\Item;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 class InventoryBuilderTest extends TestCase
 {
@@ -34,7 +35,6 @@ class InventoryBuilderTest extends TestCase
 
         $this->assertEquals(new $class($item, new SellInProperty(10), new QualityProperty(10)), $inventoryBuildResult);
     }
-
 
     public function inventoryDataProvider(): array
     {
@@ -58,5 +58,14 @@ class InventoryBuilderTest extends TestCase
                 'name' => ConjuredManaCake::NAME, 'class' => ConjuredManaCake::class,
             ],
         ];
+    }
+
+    public function testBuildThrowExceptionWhenItemDoesNotExist(): void
+    {
+        $item = new Item('Goblin Chainmail', 10, 10);
+
+        $this->expectException(RuntimeException::class);
+
+        $this->inventoryBuilder->build($item);
     }
 }
