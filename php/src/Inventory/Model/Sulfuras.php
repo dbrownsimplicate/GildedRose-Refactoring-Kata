@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace GildedRose\Inventory\Model;
 
+use GildedRose\Inventory\Property\LegendaryQuality as LegendaryQualityProperty;
+use GildedRose\Inventory\Property\Quality as QualityProperty;
+use GildedRose\Inventory\Property\SellIn as SellInProperty;
+use GildedRose\Item as GoblinItem;
+
 class Sulfuras extends AbstractInventoryModel
 {
     public const NAME = 'Sulfuras, Hand of Ragnaros';
 
-    public function __construct()
+    public function __construct(GoblinItem $item, SellInProperty $sellIn, QualityProperty $quality = null)
     {
-        // TODO: implement logic that uses a Legendary quality property that Sulfuras is supposed to have
-        //  i.e. 80 quality and doesn't increase/decrease also no sellIn date
+        parent::__construct($item, $sellIn, new LegendaryQualityProperty());
     }
 
     public function dayPasses(): void
