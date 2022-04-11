@@ -244,7 +244,7 @@ class GildedRoseTest extends TestCase
 
     public function testDexterityVestOnSellInDate()
     {
-        $items = [new Item('Elixir of the Mongoose', 0, 10)];
+        $items = [new Item('+5 Dexterity Vest', 0, 10)];
         $gildedRose = new GildedRose($items);
 
         $gildedRose->updateQuality();
@@ -255,7 +255,7 @@ class GildedRoseTest extends TestCase
 
     public function testDexterityVestAfterSellInDate()
     {
-        $items = [new Item('Elixir of the Mongoose', -5, 10)];
+        $items = [new Item('+5 Dexterity Vest', -5, 10)];
         $gildedRose = new GildedRose($items);
 
         $gildedRose->updateQuality();
