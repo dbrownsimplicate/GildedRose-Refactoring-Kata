@@ -27,11 +27,5 @@ class BackstagePasses extends AbstractInventoryModel
         }
 
         $this->updateItem();
-
-        // TODO: Implement logic that sets the following:
-        //  + Quality increases by 1 if sellIn date is more than 10
-        //  + Quality increases by 2 if sellIn date is less than or equal to 10
-        //  + Quality increases by 3 if sellIn date is less than or equal to 5
-        //  + Quality drops to zero after or on SellIn date
     }
 }
