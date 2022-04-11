@@ -31,5 +31,10 @@
         "check-cs": "ecs check",
         "fix-cs": "ecs check --fix",
         "phpstan": "phpstan analyse --ansi"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
     }
 }
