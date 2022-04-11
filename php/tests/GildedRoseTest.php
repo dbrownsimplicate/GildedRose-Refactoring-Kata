@@ -266,6 +266,39 @@ class GildedRoseTest extends TestCase
         $this->assertEqualsQuality(8, $items[0]->quality);
     }
 
+    public function testConjuredManaCakeBeforeSellInDate()
+    {
+        $items = [new Item('Conjured Mana Cake', 10, 10)];
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
+
+        $gildedRose->updateQuality();
+
+        $this->assertEqualsSellInDays(9, $items[0]->sell_in);
+        $this->assertEqualsQuality(8, $items[0]->quality);
+    }
+
+    public function testConjuredManaCakeOnSellInDate()
+    {
+        $items = [new Item('Conjured Mana Cake', 0, 10)];
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
+
+        $gildedRose->updateQuality();
+
+        $this->assertEqualsSellInDays(-1, $items[0]->sell_in);
+        $this->assertEqualsQuality(6, $items[0]->quality);
+    }
+
+    public function testConjuredManaCakeAfterSellInDate()
+    {
+        $items = [new Item('Conjured Mana Cake', -5, 10)];
+        $gildedRose = new GildedRose(new InventoryBuilder(), $items);
+
+        $gildedRose->updateQuality();
+
+        $this->assertEqualsSellInDays(-6, $items[0]->sell_in);
+        $this->assertEqualsQuality(6, $items[0]->quality);
+    }
+
     public static function assertEqualsQuality($expectedQuality, $actual, string $message = ''): void
     {
         $constraint = new IsEqual($expectedQuality);
