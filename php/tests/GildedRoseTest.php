@@ -230,4 +230,38 @@ class GildedRoseTest extends TestCase
         $this->assertEquals(-6, $items[0]->sell_in);
         $this->assertEquals(8, $items[0]->quality);
     }
+
+    public function testDexterityVestBeforeSellInDate()
+    {
+        $items = [new Item('+5 Dexterity Vest', 10, 10)];
+        $gildedRose = new GildedRose($items);
+
+        $gildedRose->updateQuality();
+
+        $this->assertEquals(9, $items[0]->sell_in);
+        $this->assertEquals(9, $items[0]->quality);
+    }
+
+    public function testDexterityVestOnSellInDate()
+    {
+        $items = [new Item('Elixir of the Mongoose', 0, 10)];
+        $gildedRose = new GildedRose($items);
+
+        $gildedRose->updateQuality();
+
+        $this->assertEquals(-1, $items[0]->sell_in);
+        $this->assertEquals(8, $items[0]->quality);
+    }
+
+    public function testDexterityVestAfterSellInDate()
+    {
+        $items = [new Item('Elixir of the Mongoose', -5, 10)];
+        $gildedRose = new GildedRose($items);
+
+        $gildedRose->updateQuality();
+
+        $this->assertEquals(-6, $items[0]->sell_in);
+        $this->assertEquals(8, $items[0]->quality);
+    }
+
 }
