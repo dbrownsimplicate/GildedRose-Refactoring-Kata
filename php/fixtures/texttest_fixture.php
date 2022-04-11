@@ -5,6 +5,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use GildedRose\GildedRose;
+use GildedRose\Inventory\Builder\InventoryBuilder;
 use GildedRose\Item;
 
 echo 'OMGHAI!' . PHP_EOL;
@@ -22,7 +23,7 @@ $items = [
     new Item('Conjured Mana Cake', 3, 6),
 ];
 
-$app = new GildedRose($items);
+$app = new GildedRose(new InventoryBuilder(), $items);
 
 $days = 2;
 if (count($argv) > 1) {
