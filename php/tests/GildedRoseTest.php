@@ -7,6 +7,7 @@ namespace Tests;
 use GildedRose\GildedRose;
 use GildedRose\Inventory\Builder\InventoryBuilder;
 use GildedRose\Item;
+use PHPUnit\Framework\Constraint\IsEqual;
 use PHPUnit\Framework\TestCase;
 
 class GildedRoseTest extends TestCase
@@ -18,8 +19,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(9, $items[0]->sell_in);
-        $this->assertEquals(11, $items[0]->quality);
+        $this->assertEqualsSellInDays(9, $items[0]->sell_in);
+        $this->assertEqualsQuality(11, $items[0]->quality);
     }
 
     public function testAgedBrieOnSellInDate(): void
@@ -29,8 +30,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(-1, $items[0]->sell_in);
-        $this->assertEquals(12, $items[0]->quality);
+        $this->assertEqualsSellInDays(-1, $items[0]->sell_in);
+        $this->assertEqualsQuality(12, $items[0]->quality);
     }
 
     public function testAgedBrieAfterSellInDate(): void
@@ -40,8 +41,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(-6, $items[0]->sell_in);
-        $this->assertEquals(12, $items[0]->quality);
+        $this->assertEqualsSellInDays(-6, $items[0]->sell_in);
+        $this->assertEqualsQuality(12, $items[0]->quality);
     }
 
     public function testAgedBrieBeforeSellInDateWithMaximumQuality(): void
@@ -51,8 +52,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(9, $items[0]->sell_in);
-        $this->assertEquals(50, $items[0]->quality);
+        $this->assertEqualsSellInDays(9, $items[0]->sell_in);
+        $this->assertEqualsQuality(50, $items[0]->quality);
     }
 
     public function testAgedBrieOnSellInDateWithMaximumQuality(): void
@@ -62,8 +63,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(-1, $items[0]->sell_in);
-        $this->assertEquals(50, $items[0]->quality);
+        $this->assertEqualsSellInDays(-1, $items[0]->sell_in);
+        $this->assertEqualsQuality(50, $items[0]->quality);
     }
 
     public function testAgedBrieOnSellInDateNearMaximumQuality(): void
@@ -73,8 +74,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(-1, $items[0]->sell_in);
-        $this->assertEquals(50, $items[0]->quality);
+        $this->assertEqualsSellInDays(-1, $items[0]->sell_in);
+        $this->assertEqualsQuality(50, $items[0]->quality);
     }
 
     public function testAgedBrieAfterSellInDateWithMaximumQuality(): void
@@ -84,8 +85,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(-11, $items[0]->sell_in);
-        $this->assertEquals(50, $items[0]->quality);
+        $this->assertEqualsSellInDays(-11, $items[0]->sell_in);
+        $this->assertEqualsQuality(50, $items[0]->quality);
     }
 
     public function testBackstagePassesBeforeSellInDate(): void
@@ -95,8 +96,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(9, $items[0]->sell_in);
-        $this->assertEquals(12, $items[0]->quality);
+        $this->assertEqualsSellInDays(9, $items[0]->sell_in);
+        $this->assertEqualsQuality(12, $items[0]->quality);
     }
 
     public function testBackstagePassesMoreThanTenDaysBeforeSellInDate(): void
@@ -106,8 +107,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(10, $items[0]->sell_in);
-        $this->assertEquals(12, $items[0]->quality);
+        $this->assertEqualsSellInDays(10, $items[0]->sell_in);
+        $this->assertEqualsQuality(12, $items[0]->quality);
     }
 
     public function testBackstagePassesQualityIncreaseByThreeWithFiveDaysLeftToSellInDate(): void
@@ -117,8 +118,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(4, $items[0]->sell_in);
-        $this->assertEquals(13, $items[0]->quality);
+        $this->assertEqualsSellInDays(4, $items[0]->sell_in);
+        $this->assertEqualsQuality(13, $items[0]->quality);
     }
 
 
@@ -129,8 +130,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(-1, $items[0]->sell_in);
-        $this->assertEquals(0, $items[0]->quality);
+        $this->assertEqualsSellInDays(-1, $items[0]->sell_in);
+        $this->assertEqualsQuality(0, $items[0]->quality);
     }
 
     public function testBackstagePassesCloseToSellInDateWithMaximumQuality(): void
@@ -140,8 +141,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(9, $items[0]->sell_in);
-        $this->assertEquals(50, $items[0]->quality);
+        $this->assertEqualsSellInDays(9, $items[0]->sell_in);
+        $this->assertEqualsQuality(50, $items[0]->quality);
     }
 
     public function testBackstagePassesFiveDaysLeftToSellInDateWithMaximumQuality(): void
@@ -151,8 +152,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(4, $items[0]->sell_in);
-        $this->assertEquals(50, $items[0]->quality);
+        $this->assertEqualsSellInDays(4, $items[0]->sell_in);
+        $this->assertEqualsQuality(50, $items[0]->quality);
     }
 
     public function testBackstagePassesQualityDropsToZeroAfterSellInDateWithMaximumQuality(): void
@@ -162,8 +163,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(-1, $items[0]->sell_in);
-        $this->assertEquals(0, $items[0]->quality);
+        $this->assertEqualsSellInDays(-1, $items[0]->sell_in);
+        $this->assertEqualsQuality(0, $items[0]->quality);
     }
 
     public function testSulfurasBeforeSellInDate()
@@ -173,8 +174,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(10, $items[0]->sell_in);
-        $this->assertEquals(80, $items[0]->quality);
+        $this->assertEqualsSellInDays(10, $items[0]->sell_in);
+        $this->assertEqualsQuality(80, $items[0]->quality);
     }
 
     public function testSulfurasOnSellInDate()
@@ -184,8 +185,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(0, $items[0]->sell_in);
-        $this->assertEquals(80, $items[0]->quality);
+        $this->assertEqualsSellInDays(0, $items[0]->sell_in);
+        $this->assertEqualsQuality(80, $items[0]->quality);
     }
 
     public function testSulfurasAfterSellInDate()
@@ -195,8 +196,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(-1, $items[0]->sell_in);
-        $this->assertEquals(80, $items[0]->quality);
+        $this->assertEqualsSellInDays(-1, $items[0]->sell_in);
+        $this->assertEqualsQuality(80, $items[0]->quality);
     }
 
     public function testElixirBeforeSellInDate()
@@ -206,8 +207,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(9, $items[0]->sell_in);
-        $this->assertEquals(9, $items[0]->quality);
+        $this->assertEqualsSellInDays(9, $items[0]->sell_in);
+        $this->assertEqualsQuality(9, $items[0]->quality);
     }
 
     public function testElixirOnSellInDate()
@@ -217,8 +218,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(-1, $items[0]->sell_in);
-        $this->assertEquals(8, $items[0]->quality);
+        $this->assertEqualsSellInDays(-1, $items[0]->sell_in);
+        $this->assertEqualsQuality(8, $items[0]->quality);
     }
 
     public function testElixirAfterSellInDate()
@@ -228,8 +229,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(-6, $items[0]->sell_in);
-        $this->assertEquals(8, $items[0]->quality);
+        $this->assertEqualsSellInDays(-6, $items[0]->sell_in);
+        $this->assertEqualsQuality(8, $items[0]->quality);
     }
 
     public function testDexterityVestBeforeSellInDate()
@@ -239,8 +240,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(9, $items[0]->sell_in);
-        $this->assertEquals(9, $items[0]->quality);
+        $this->assertEqualsSellInDays(9, $items[0]->sell_in);
+        $this->assertEqualsQuality(9, $items[0]->quality);
     }
 
     public function testDexterityVestOnSellInDate()
@@ -250,8 +251,8 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(-1, $items[0]->sell_in);
-        $this->assertEquals(8, $items[0]->quality);
+        $this->assertEqualsSellInDays(-1, $items[0]->sell_in);
+        $this->assertEqualsQuality(8, $items[0]->quality);
     }
 
     public function testDexterityVestAfterSellInDate()
@@ -261,8 +262,21 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertEquals(-6, $items[0]->sell_in);
-        $this->assertEquals(8, $items[0]->quality);
+        $this->assertEqualsSellInDays(-6, $items[0]->sell_in);
+        $this->assertEqualsQuality(8, $items[0]->quality);
     }
 
+    public static function assertEqualsQuality($expectedQuality, $actual, string $message = ''): void
+    {
+        $constraint = new IsEqual($expectedQuality);
+
+        static::assertThat($actual, $constraint, $message);
+    }
+
+    public static function assertEqualsSellInDays($expectedSellInDays, $actual, string $message = ''): void
+    {
+        $constraint = new IsEqual($expectedSellInDays);
+
+        static::assertThat($actual, $constraint, $message);
+    }
 }
