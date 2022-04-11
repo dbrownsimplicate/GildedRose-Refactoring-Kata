@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Tests\Inventory\Model;
 
 use GildedRose\Inventory\Model\AgedBrie;
 use GildedRose\Inventory\Property\Quality as QualityProperty;

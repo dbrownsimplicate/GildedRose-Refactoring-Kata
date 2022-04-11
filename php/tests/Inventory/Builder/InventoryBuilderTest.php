@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Tests\Inventory\Builder;
 
 use GildedRose\Inventory\Builder\InventoryBuilder;
 use GildedRose\Inventory\Model\AgedBrie;
