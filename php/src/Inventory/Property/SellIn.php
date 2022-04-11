@@ -23,7 +23,7 @@ class SellIn
         return 1 > $this->days;
     }
 
-    public function getNumberOfDays(): int
+    public function getDaysInteger(): int
     {
         return $this->days;
     }
