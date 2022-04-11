@@ -22,6 +22,7 @@ class Quality
         if ($quality < self::ONE) {
             $quality = self::ZERO;
         }
+
         if ($quality > self::MAXIMUM_QUALITY) {
             $quality = self::MAXIMUM_QUALITY;
         }

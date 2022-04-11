@@ -37,9 +37,11 @@ abstract class AbstractInventoryModel
     public function dayPasses(): void
     {
         $this->sellIn->decrease();
+
         if ($this->sellIn->hasPassed()) {
             $this->qualityDegradation *= 2;
         }
+
         $this->quality->decrease($this->qualityDegradation);
 
         $this->updateItem();
