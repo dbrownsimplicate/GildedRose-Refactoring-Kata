@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace GildedRose;
 
+use GildedRose\Inventory\Builder\InventoryBuilder;
+
 final class GildedRose
 {
-    /**
-     * @var Item[]
-     */
-    private $items;
+    private array $items;
 
-    public function __construct(array $items)
+    private InventoryBuilder $inventoryBuilder;
+
+    public function __construct(InventoryBuilder $inventoryBuilder, $items)
     {
+        $this->inventoryBuilder = $inventoryBuilder;
         $this->items = $items;
     }
 
